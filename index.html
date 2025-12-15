@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalFlow NC - Automate Legal Contract Drafting</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #1a1a1a; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 20px 0; position: sticky; top: 0; z-index: 100; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: 700; color: #137fec; text-decoration: none; }
+        nav { display: flex; gap: 32px; align-items: center; }
+        nav a { color: #4b5563; text-decoration: none; font-size: 14px; font-weight: 500; }
+        nav a:hover { color: #137fec; }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 14px; }
+        .btn-primary { background: #137fec; color: #fff; }
+        .btn-primary:hover { background: #0b5cb5; }
+        .hero { padding: 80px 0; background: linear-gradient(135deg, #f8fafc 0%, #fff 100%); }
+        .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; background: #eff6ff; color: #137fec; border-radius: 50px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 24px; }
+        h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; color: #0f172a; }
+        h1 .highlight { color: #137fec; }
+        .hero-description { font-size: 20px; color: #64748b; margin-bottom: 32px; }
+        .hero-buttons { display: flex; gap: 16px; margin-bottom: 24px; }
+        .hero-buttons .btn { font-size: 16px; padding: 16px 32px; }
+        .trust-signal { display: flex; align-items: center; gap: 8px; color: #10b981; font-size: 14px; font-weight: 500; }
+        .problem-section { padding: 80px 0; background: #f8fafc; }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        h2 { font-size: 42px; font-weight: 800; margin-bottom: 16px; color: #0f172a; }
+        .section-description { font-size: 18px; color: #64748b; }
+        .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+        .problem-card { background: #fff; padding: 40px; border-radius: 16px; border: 1px solid #e5e7eb; }
+        .problem-icon { width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 28px; }
+        .problem-icon.red { background: #fef2f2; color: #ef4444; }
+        .problem-icon.orange { background: #fff7ed; color: #f97316; }
+        .problem-icon.blue { background: #eff6ff; color: #137fec; }
+        .problem-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+        .problem-card p { color: #64748b; }
+        .pricing-section { padding: 100px 0; background: #f8fafc; }
+        .pricing-card { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); overflow: hidden; display: grid; grid-template-columns: 1.5fr 1fr; }
+        .pricing-content { padding: 60px; }
+        .pricing-features { list-style: none; margin-bottom: 32px; }
+        .pricing-features li { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+        .pricing-features li::before { content: "?"; color: #137fec; font-weight: 700; font-size: 18px; }
+        .pricing-price { background: linear-gradient(135deg, #f8fafc 0%, #e5e7eb 100%); padding: 60px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .price-value { font-size: 72px; font-weight: 900; color: #0f172a; margin-bottom: 16px; }
+        .price-badge { background: #d1fae5; color: #065f46; padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; }
+        .disclaimer { max-width: 900px; margin: 48px auto 0; background: #fef3c7; padding: 24px 32px; border-radius: 16px; border: 1px solid #fde68a; }
+        .disclaimer p { font-size: 14px; color: #78350f; }
+        footer { background: #0f172a; color: #94a3b8; padding: 48px 0; }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo { color: #fff; font-weight: 700; }
+        .footer-links { display: flex; gap: 32px; }
+        .footer-links a { color: #94a3b8; text-decoration: none; font-size: 14px; }
+        @media (max-width: 768px) {
+            .hero-content, .problem-grid, .pricing-card { grid-template-columns: 1fr; }
+            h1 { font-size: 36px; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">?? LegalFlow NC</a>
+                <nav>
+                    <a href="#how-it-works">How it Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#pricing" class="btn btn-primary">Get Started</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div>
+                    <div class="badge">? AUTOMATED LEGAL DRAFTING</div>
+                    <h1>Automate Legal Contract Drafting in <span class="highlight">Minutes</span></h1>
+                    <p class="hero-description">Turn simple inputs into tailored Independent Contractor Agreements — No lawyer needed. Powered by smart automation and battle-tested NC legal templates.</p>
+                    <div class="hero-buttons">
+                        <a href="#pricing" class="btn btn-primary">Generate My First Contract</a>
+                    </div>
+                    <div class="trust-signal">? Designed for North Carolina businesses</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #137fec 0%, #7c3aed 100%); border-radius: 16px; height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">??</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Traditional Way is Broken</h2>
+                <p class="section-description">Don't let legal hurdles slow down your business growth.</p>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon red">??</div>
+                    <h3>Exorbitant Attorney Costs</h3>
+                    <p>Traditional drafting costs $300+ per hour, running up thousands for a single document.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon orange">??</div>
+                    <h3>Risky Generic Templates</h3>
+                    <p>Free templates don't protect North Carolina businesses effectively.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon blue">?</div>
+                    <h3>Slow Turnaround</h3>
+                    <p>Legal help takes weeks of back-and-forth, killing your momentum.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="pricing-card">
+                <div class="pricing-content">
+                    <h2>Ready to protect your business?</h2>
+                    <p style="margin-bottom: 32px;">Get your professional, NC-compliant Independent Contractor Agreement today.</p>
+                    <ul class="pricing-features">
+                        <li>Unlimited Revisions (7 days)</li>
+                        <li>PDF & Word Format</li>
+                        <li>Secure Payment</li>
+                    </ul>
+                    <a href="https://buy.stripe.com/test_your_payment_link" class="btn btn-primary" style="display: block; text-align: center; padding: 18px;">Get Your NC Contract ?</a>
+                </div>
+                <div class="pricing-price">
+                    <div class="price-value">$49</div>
+                    <div class="price-badge">Save 90% vs Attorneys</div>
+                </div>
+            </div>
+            <div class="disclaimer">
+                <p><strong>Disclaimer:</strong> This tool generates legal templates based on your inputs. It is not legal advice and no attorney-client relationship is formed. Attorney review recommended for complex situations.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">?? LegalFlow NC</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+                <p>© 2025 LegalFlow NC. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
