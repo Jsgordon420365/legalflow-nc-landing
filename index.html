@@ -1,159 +1,376 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LegalFlow NC - Automate Legal Contract Drafting</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #1a1a1a; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        header { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 20px 0; position: sticky; top: 0; z-index: 100; }
-        .header-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 20px; font-weight: 700; color: #137fec; text-decoration: none; }
-        nav { display: flex; gap: 32px; align-items: center; }
-        nav a { color: #4b5563; text-decoration: none; font-size: 14px; font-weight: 500; }
-        nav a:hover { color: #137fec; }
-        .btn { display: inline-block; padding: 12px 28px; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 14px; }
-        .btn-primary { background: #137fec; color: #fff; }
-        .btn-primary:hover { background: #0b5cb5; }
-        .hero { padding: 80px 0; background: linear-gradient(135deg, #f8fafc 0%, #fff 100%); }
-        .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; background: #eff6ff; color: #137fec; border-radius: 50px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 24px; }
-        h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; color: #0f172a; }
-        h1 .highlight { color: #137fec; }
-        .hero-description { font-size: 20px; color: #64748b; margin-bottom: 32px; }
-        .hero-buttons { display: flex; gap: 16px; margin-bottom: 24px; }
-        .hero-buttons .btn { font-size: 16px; padding: 16px 32px; }
-        .trust-signal { display: flex; align-items: center; gap: 8px; color: #10b981; font-size: 14px; font-weight: 500; }
-        .problem-section { padding: 80px 0; background: #f8fafc; }
-        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
-        h2 { font-size: 42px; font-weight: 800; margin-bottom: 16px; color: #0f172a; }
-        .section-description { font-size: 18px; color: #64748b; }
-        .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-        .problem-card { background: #fff; padding: 40px; border-radius: 16px; border: 1px solid #e5e7eb; }
-        .problem-icon { width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 28px; }
-        .problem-icon.red { background: #fef2f2; color: #ef4444; }
-        .problem-icon.orange { background: #fff7ed; color: #f97316; }
-        .problem-icon.blue { background: #eff6ff; color: #137fec; }
-        .problem-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
-        .problem-card p { color: #64748b; }
-        .pricing-section { padding: 100px 0; background: #f8fafc; }
-        .pricing-card { max-width: 900px; margin: 0 auto; background: #fff; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); overflow: hidden; display: grid; grid-template-columns: 1.5fr 1fr; }
-        .pricing-content { padding: 60px; }
-        .pricing-features { list-style: none; margin-bottom: 32px; }
-        .pricing-features li { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
-        .pricing-features li::before { content: "?"; color: #137fec; font-weight: 700; font-size: 18px; }
-        .pricing-price { background: linear-gradient(135deg, #f8fafc 0%, #e5e7eb 100%); padding: 60px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .price-value { font-size: 72px; font-weight: 900; color: #0f172a; margin-bottom: 16px; }
-        .price-badge { background: #d1fae5; color: #065f46; padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 700; }
-        .disclaimer { max-width: 900px; margin: 48px auto 0; background: #fef3c7; padding: 24px 32px; border-radius: 16px; border: 1px solid #fde68a; }
-        .disclaimer p { font-size: 14px; color: #78350f; }
-        footer { background: #0f172a; color: #94a3b8; padding: 48px 0; }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; }
-        .footer-logo { color: #fff; font-weight: 700; }
-        .footer-links { display: flex; gap: 32px; }
-        .footer-links a { color: #94a3b8; text-decoration: none; font-size: 14px; }
-        @media (max-width: 768px) {
-            .hero-content, .problem-grid, .pricing-card { grid-template-columns: 1fr; }
-            h1 { font-size: 36px; }
-            nav { display: none; }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Action on Judgment | Local Toolkit</title>
+  <meta name="description" content="Local case toolkit for generating Complaint in Action on Judgment." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.09);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.72);
+      --faint: rgba(255,255,255,0.50);
+      --line: rgba(255,255,255,0.14);
+      --accent: #7dd3fc;
+      --accent2: #a78bfa;
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --danger: #fb7185;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7fafc;
+        --card: rgba(0,0,0,0.045);
+        --card2: rgba(0,0,0,0.065);
+        --text: rgba(10,12,18,0.92);
+        --muted: rgba(10,12,18,0.70);
+        --faint: rgba(10,12,18,0.52);
+        --line: rgba(10,12,18,0.12);
+        --shadow: 0 12px 28px rgba(0,0,0,0.12);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(125, 211, 252, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(167, 139, 250, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 60% 90%, rgba(52, 211, 153, 0.10), transparent 60%),
+        var(--bg);
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 46px;
+    }
+
+    .top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      min-width: 260px;
+    }
+
+    .badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,0.35), transparent 60%),
+        linear-gradient(135deg, rgba(125,211,252,0.55), rgba(167,139,250,0.55));
+      box-shadow: 0 10px 24px rgba(0,0,0,0.20);
+    }
+
+    h1 {
+      font-size: 18px;
+      line-height: 1.2;
+      margin: 0;
+      letter-spacing: 0.2px;
+    }
+
+    .sub {
+      margin: 3px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .meta {
+      display: grid;
+      gap: 8px;
+      justify-items: end;
+      min-width: 260px;
+      text-align: right;
+    }
+
+    .pillrow {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .pill strong { color: var(--text); font-weight: 600; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 840px) {
+      .grid { grid-template-columns: 1fr; }
+      .meta { justify-items: start; text-align: left; }
+      .pillrow { justify-content: flex-start; }
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      box-shadow: var(--shadow);
+      padding: 16px;
+      backdrop-filter: blur(10px);
+    }
+
+    .card h2 {
+      font-size: 14px;
+      letter-spacing: 0.2px;
+      margin: 0 0 10px;
+    }
+
+    .card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+      transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(125,211,252,0.40);
+      background: rgba(255,255,255,0.07);
+    }
+
+    .btn:active { transform: translateY(0px); }
+
+    .btn .left {
+      display: grid;
+      gap: 2px;
+    }
+
+    .btn .title {
+      font-weight: 650;
+      font-size: 13px;
+    }
+
+    .btn .hint {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--faint);
+    }
+
+    .btn .tag {
+      font-size: 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 9px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .tag.ok { border-color: rgba(52,211,153,0.35); color: rgba(52,211,153,0.9); }
+    .tag.warn { border-color: rgba(251,191,36,0.40); color: rgba(251,191,36,0.95); }
+    .tag.info { border-color: rgba(125,211,252,0.35); color: rgba(125,211,252,0.9); }
+
+    .code {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px dashed var(--line);
+      background: rgba(0,0,0,0.14);
+      overflow-x: auto;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.45;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .code {
+        background: rgba(10,12,18,0.045);
+        color: rgba(10,12,18,0.86);
+      }
+    }
+
+    .footer {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .k {
+      font-family: var(--mono);
+      padding: 2px 6px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      white-space: nowrap;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">?? LegalFlow NC</a>
-                <nav>
-                    <a href="#how-it-works">How it Works</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#pricing" class="btn btn-primary">Get Started</a>
-                </nav>
-            </div>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="badge" aria-hidden="true"></div>
+        <div>
+          <h1>Action on Judgment | Local Toolkit</h1>
+          <div class="sub">Internal drafting utility for active-case work. Structured intake. DOCX output.</div>
         </div>
-    </header>
+      </div>
+      <div class="meta">
+        <div class="pillrow">
+          <div class="pill"><strong>Status</strong> Local</div>
+          <div class="pill"><strong>Output</strong> DOCX</div>
+          <div class="pill"><strong>Mode</strong> Streamlit</div>
+        </div>
+        <div class="sub">Safety reminder: template generator only. No legal advice. Suitability depends on provided information.</div>
+      </div>
+    </div>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div>
-                    <div class="badge">? AUTOMATED LEGAL DRAFTING</div>
-                    <h1>Automate Legal Contract Drafting in <span class="highlight">Minutes</span></h1>
-                    <p class="hero-description">Turn simple inputs into tailored Independent Contractor Agreements — No lawyer needed. Powered by smart automation and battle-tested NC legal templates.</p>
-                    <div class="hero-buttons">
-                        <a href="#pricing" class="btn btn-primary">Generate My First Contract</a>
-                    </div>
-                    <div class="trust-signal">? Designed for North Carolina businesses</div>
-                </div>
-                <div style="background: linear-gradient(135deg, #137fec 0%, #7c3aed 100%); border-radius: 16px; height: 400px; display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">??</div>
+    <div class="grid">
+      <section class="card">
+        <h2>1.0 Quick Start</h2>
+        <p>Run the app from PowerShell in this folder. Use the template placeholders exactly as written.</p>
+        <div class="code">1.1 cd .\action_on_judgment
+1.2 pip install -r requirements.txt
+1.3 streamlit run app.py</div>
+        <div style="height: 10px"></div>
+        <div class="actions">
+          <a class="btn" href="complaint_action_on_judgment__template_v1.docx">
+            <div class="left">
+              <div class="title">Open Template DOCX</div>
+              <div class="hint">complaint_action_on_judgment__template_v1.docx</div>
             </div>
-        </div>
-    </section>
+            <div class="tag info">Template</div>
+          </a>
 
-    <section class="problem-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>The Traditional Way is Broken</h2>
-                <p class="section-description">Don't let legal hurdles slow down your business growth.</p>
+          <a class="btn" href="app.py">
+            <div class="left">
+              <div class="title">View Streamlit App</div>
+              <div class="hint">app.py</div>
             </div>
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="problem-icon red">??</div>
-                    <h3>Exorbitant Attorney Costs</h3>
-                    <p>Traditional drafting costs $300+ per hour, running up thousands for a single document.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon orange">??</div>
-                    <h3>Risky Generic Templates</h3>
-                    <p>Free templates don't protect North Carolina businesses effectively.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon blue">?</div>
-                    <h3>Slow Turnaround</h3>
-                    <p>Legal help takes weeks of back-and-forth, killing your momentum.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="tag ok">UI</div>
+          </a>
 
-    <section class="pricing-section" id="pricing">
-        <div class="container">
-            <div class="pricing-card">
-                <div class="pricing-content">
-                    <h2>Ready to protect your business?</h2>
-                    <p style="margin-bottom: 32px;">Get your professional, NC-compliant Independent Contractor Agreement today.</p>
-                    <ul class="pricing-features">
-                        <li>Unlimited Revisions (7 days)</li>
-                        <li>PDF & Word Format</li>
-                        <li>Secure Payment</li>
-                    </ul>
-                    <a href="https://buy.stripe.com/test_your_payment_link" class="btn btn-primary" style="display: block; text-align: center; padding: 18px;">Get Your NC Contract ?</a>
-                </div>
-                <div class="pricing-price">
-                    <div class="price-value">$49</div>
-                    <div class="price-badge">Save 90% vs Attorneys</div>
-                </div>
+          <a class="btn" href="generate_doc.py">
+            <div class="left">
+              <div class="title">View Generator Logic</div>
+              <div class="hint">generate_doc.py</div>
             </div>
-            <div class="disclaimer">
-                <p><strong>Disclaimer:</strong> This tool generates legal templates based on your inputs. It is not legal advice and no attorney-client relationship is formed. Attorney review recommended for complex situations.</p>
-            </div>
-        </div>
-    </section>
+            <div class="tag ok">Engine</div>
+          </a>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">?? LegalFlow NC</div>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact</a>
-                </div>
-                <p>© 2025 LegalFlow NC. All rights reserved.</p>
+          <a class="btn" href="requirements.txt">
+            <div class="left">
+              <div class="title">View Dependencies</div>
+              <div class="hint">requirements.txt</div>
             </div>
+            <div class="tag warn">Install</div>
+          </a>
         </div>
-    </footer>
+      </section>
+
+      <aside class="card">
+        <h2>2.0 Operating Notes</h2>
+        <p>Keep the workflow simple. Don’t add features. Generate drafts. Review. File. Repeat.</p>
+        <div class="code">2.1 Always run validation before use (if enabled)
+2.2 Completeness checks only, no legal scoring
+2.3 Keep master template unchanged
+2.4 Save generated outputs into a dated folder</div>
+        <div style="height: 10px"></div>
+        <div class="actions">
+          <a class="btn" href="#" onclick="copyCmd(); return false;">
+            <div class="left">
+              <div class="title">Copy Run Command</div>
+              <div class="hint">streamlit run app.py</div>
+            </div>
+            <div class="tag info">Copy</div>
+          </a>
+
+          <a class="btn" href="#" onclick="showTip(); return false;">
+            <div class="left">
+              <div class="title">Show Template Placeholder Tip</div>
+              <div class="hint">Use {{UPPER_SNAKE_CASE}}</div>
+            </div>
+            <div class="tag info">Tip</div>
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer">
+      3.0 Keyboard note: open this file locally and keep it pinned. Use <span class="k">Ctrl</span> + <span class="k">L</span> in PowerShell to clear clutter. Use <span class="k">↑</span> to rerun commands.  
+      3.1 Legal note: this toolkit generates drafts from provided inputs. It does not provide legal advice.
+    </div>
+  </div>
+
+  <script>
+    function copyCmd() {
+      const txt = "streamlit run app.py";
+      navigator.clipboard.writeText(txt).then(() => {
+        alert("Copied: " + txt);
+      }).catch(() => {
+        prompt("Copy this:", txt);
+      });
+    }
+
+    function showTip() {
+      alert("Template tip: keep placeholders exactly like {{PLACEHOLDER_NAME}} so docxtpl can render cleanly.");
+    }
+  </script>
 </body>
 </html>

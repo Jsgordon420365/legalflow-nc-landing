@@ -1,0 +1,3 @@
+﻿streamlit
+docxtpl
+python-docx
